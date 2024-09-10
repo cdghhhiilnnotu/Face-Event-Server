@@ -18,14 +18,14 @@ face_reg = FaceRecogition()
 face_reg.load_models(model_path, embedded_path, classes_path)
 
 @app.get("/predicting/")
-# async def upload_image(data: ImageData):
-async def upload_image():
+async def upload_image(data: ImageData):
+# async def upload_image():
     face_score = "-1"
     face_id = "undefined"
 
-    # img_data = base64.b64decode(data.image)
-    # img = Image.open(io.BytesIO(img_data))
-    img = Image.open("image.png")
+    img_data = base64.b64decode(data.image)
+    img = Image.open(io.BytesIO(img_data))
+    # img = Image.open("test1.png")
     img = np.array(img)
     img = cv2.resize(img, (160, 160))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -37,8 +37,8 @@ async def upload_image():
     face_id = face_reg.predict(img)
     # print(f"face_id: {face_id}")
 
-    return JSONResponse(content={"id": "2055010153", "score": 0.99}, status_code=200)
-    # return JSONResponse(content={"id": face_id, "score": face_score}, status_code=200)
+    # return JSONResponse(content={"id": "2055010153", "score": 0.99}, status_code=200)
+    return JSONResponse(content={"id": face_id, "score": face_score}, status_code=200)
 
 if __name__ == "__main__":
     import uvicorn
