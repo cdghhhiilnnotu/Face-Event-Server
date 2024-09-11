@@ -169,7 +169,8 @@ testingdata/
 testing.py
 face.py
 face-1/
-models/hau_face_data.npz
+models/all/hau_face_data.npz
+hau_datasets/
 *.png
 *.jpg
 
